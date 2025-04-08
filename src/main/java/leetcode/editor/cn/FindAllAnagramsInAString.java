@@ -17,26 +17,25 @@ public class FindAllAnagramsInAString {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public List<Integer> findAnagrams(String s, String p) {
-            List<Integer> res = new ArrayList<>();
-            int[] pCnt = new int[26];
+            List<Integer> result = new ArrayList<>();
+            //固定长度的窗口
             int[] sCnt = new int[26];
-            for(char c: p.toCharArray()){
+            int[] pCnt = new int[26];
+            for (Character c : p.toCharArray()){
                 pCnt[c-'a']++;
             }
             for(int right=0;right<s.length();right++){
                 sCnt[s.charAt(right)-'a']++;
                 int left = right-p.length()+1;
-                if(left<0){
+                if (left<0){
                     continue;
                 }
-                if (Arrays.equals(pCnt, sCnt)){
-                    res.add(left);
+                if (Arrays.equals(sCnt, pCnt)){
+                    result.add(left);
                 }
                 sCnt[s.charAt(left)-'a']--;
             }
-            return res;
-
-
+            return result;
         }
     }
     //leetcode submit region end(Prohibit modification and deletion)
@@ -65,5 +64,30 @@ public class FindAllAnagramsInAString {
 //        }
 //    }
 //    return result;
+//
+//}
+
+
+
+//public List<Integer> findAnagrams(String s, String p) {
+//    List<Integer> res = new ArrayList<>();
+//    int[] pCnt = new int[26];
+//    int[] sCnt = new int[26];
+//    for(char c: p.toCharArray()){
+//        pCnt[c-'a']++;
+//    }
+//    for(int right=0;right<s.length();right++){
+//        sCnt[s.charAt(right)-'a']++;
+//        int left = right-p.length()+1;
+//        if(left<0){
+//            continue;
+//        }
+//        if (Arrays.equals(pCnt, sCnt)){
+//            res.add(left);
+//        }
+//        sCnt[s.charAt(left)-'a']--;
+//    }
+//    return res;
+//
 //
 //}
