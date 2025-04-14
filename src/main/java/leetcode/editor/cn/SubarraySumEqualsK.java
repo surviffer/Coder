@@ -13,18 +13,18 @@ public class SubarraySumEqualsK {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int subarraySum(int[] nums, int k){
-            int count =0;
+            int count = 0;
             int sum = 0;
-            Map<Integer, Integer> map = new HashMap<>();
-            map.put(0, 1);//前缀和0出现一次
+            HashMap<Integer,Integer> hashMap = new HashMap<>();
+            hashMap.put(0, 1);//sum=0的有一个
             for (int num:nums){
                 sum+=num;
-                if (map.containsKey(sum-k)){
-                    count+=map.get(sum-k);
+                if (hashMap.containsKey(sum-k)){
+                    count+=hashMap.get(sum-k);
                 }
-                map.put(sum, map.getOrDefault(sum, 0)+1);
-            }
+                hashMap.put(sum, hashMap.getOrDefault(sum, 0)+1);
 
+            }
             return count;
 
         }

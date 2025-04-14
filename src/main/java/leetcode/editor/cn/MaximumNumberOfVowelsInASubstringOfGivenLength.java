@@ -13,24 +13,32 @@ public class MaximumNumberOfVowelsInASubstringOfGivenLength {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int maxVowels(String s, int k){
-            int n = s.length();
-            int init = 0;
-            for (int i=0;i<k;i++){
-                if(isVowel(s.charAt(i))){
-                    init++;
+            //记录最大的
+            int max_count=0;
+            //记录每次窗口内满足条件的个数
+            int count=0;
+            int left=0;
+            int right=0;
+            int len=s.length();
+            while (right<len){
+                char c = s.charAt(right);
+                right++;
+                if (isVowel(c)){
+                    count++;
+                }
+                //窗口长于k,要收缩
+                if (right-left>k){
+                    if (isVowel(s.charAt(left))){
+                        count--;
+                    }
+                    left++;
+                }
+
+                if (right-left==k){
+                    max_count=Math.max(count, max_count);
                 }
             }
-            int res = init;
-            for (int left=1,right=k;right<n;left++,right++){
-                if (isVowel(s.charAt(left-1))){
-                    init--;
-                }
-                if(isVowel(s.charAt(right))){
-                    init++;
-                }
-                res = Math.max(res,init);
-            }
-            return res;
+            return max_count;
         }
 //        public int maxVowels(String s, int k) {
 //            int[] vowelRes = new int[s.length()];
@@ -58,6 +66,26 @@ public class MaximumNumberOfVowelsInASubstringOfGivenLength {
         boolean isVowel(Character c){
             return "aeiou".indexOf(c) != -1;
         }
+
+
+//        int n = s.length();
+//        int init = 0;
+//            for (int i=0;i<k;i++){
+//            if(isVowel(s.charAt(i))){
+//                init++;
+//            }
+//        }
+//        int res = init;
+//            for (int left=1,right=k;right<n;left++,right++){
+//            if (isVowel(s.charAt(left-1))){
+//                init--;
+//            }
+//            if(isVowel(s.charAt(right))){
+//                init++;
+//            }
+//            res = Math.max(res,init);
+//        }
+//            return res;
     }
 //leetcode submit region end(Prohibit modification and deletion)
 
